@@ -71,6 +71,8 @@ function MapBox() {
       const bbox = turf.bbox(data) as [number, number, number, number];
       map.current?.fitBounds(bbox, { padding: 100, duration: 1000 });
     }
+    // select the feature
+    draw.changeMode("simple_select", { featureIds: [id] });
   }
 
   return (
