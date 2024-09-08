@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  display: block;
+}
+
+#root {
+  display: flex;
+  flex-direction: row;
+}
+
+.map-container {
+  height: 919px !important;
+  width: 70% !important;
+}
+
+.draw-tools {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.sidebar {
+  background-color: rgb(35 55 75 / 90%);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px;
+}
+
+/* .mapboxgl-ctrl-top-right {
+  top: 60px !important;
+  position: fixed !important;
+} */
