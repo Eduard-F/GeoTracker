@@ -1,11 +1,47 @@
-const express = require('express')
-const app = express()
-const port = 4000
+import passport from "passport";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import bodyParser from "body-parser";
+import express from "express";
 
-app.get('/', (_req: any, res: { send: (arg0: string) => void }) => {
-  res.send('Hello World!')
-})
+import { initProd } from "./startup/prod";
+import { initDB } from "./startup/db";
+import { initCORS } from "./startup/cors";
+import { initPassportJS } from "./startup/passport";
+import { initRoutes } from "./routes/index";
+import { initRateLimit } from "./startup/rate-limit";
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+const port = process.env.PORT || 4000;
+const app = express();
+
+initPassportJS();
+initCORS(app);
+initDB();
+initProd(app);
+initRateLimit(app);
+
+// Create session
+app.use(
+  session({
+    // Used to compute a hash
+    secret: process.env.SESSION_KEY! || 'secret',
+    resave: false,
+    saveUninitialized: false,
+    // cookie: { secure: true } when using HTTPS
+    // Store session on DB
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI || "mongodb://localhost:27017/test",
+    }),
+  })
+);
+
+// Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+initRoutes(app);
+
+app.listen(port, () => console.log(`Listening on port ${port}...`));
