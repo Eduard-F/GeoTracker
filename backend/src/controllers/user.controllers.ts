@@ -21,13 +21,13 @@ export const postUser = async (req: Request, res: Response) => {
   // @ts-ignore
   if (error) return res.status(400).send({ message: error.details[0].message });
 
-  let sanitizedInput = sanitize<{ username: string; password: string; email: string }>(req.body);
+  let sanitizedInput = sanitize<{ email: string; password: string; }>(req.body);
 
   try {
-    let user = await UserService.findUserBy("username", sanitizedInput.username.toLowerCase());
+    let user = await UserService.findUserBy("email", sanitizedInput.email.toLowerCase());
 
     if (user) {
-      return res.status(400).send({ message: "Username already taken. Take an another Username" });
+      return res.status(400).send({ message: "email already taken. Take an another email" });
     }
 
     user = await UserService.findUserBy("email", sanitizedInput.email.toLowerCase());

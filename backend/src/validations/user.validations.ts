@@ -2,21 +2,21 @@ import Joi from "joi";
 import { UserDocument } from "../models/user.models";
 
 export function validateUser(
-  user: Pick<UserDocument, "username" | "email" | "password" | "isAdmin">
+  user: Pick<UserDocument, "name" | "email" | "password" | "role">
 ) {
   const schema = Joi.object({
-    username: Joi.string().min(3).max(50).required(),
+    name: Joi.string().min(3).max(50).required(),
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(255).required(),
-    isAdmin: Joi.boolean().required(),
+    role: Joi.string().min(3).max(50).required(),
   });
 
   return schema.validate(user);
 }
 
-export function validateLoginInput(input: Pick<UserDocument, "username" | "password">) {
+export function validateLoginInput(input: Pick<UserDocument, "email" | "password">) {
   const schema = Joi.object({
-    username: Joi.string().min(3).max(50).required(),
+    email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(255).required(),
   });
 
@@ -24,10 +24,9 @@ export function validateLoginInput(input: Pick<UserDocument, "username" | "passw
 }
 
 export function validateRegisterInput(
-  input: Pick<UserDocument, "username" | "email" | "password">
+  input: Pick<UserDocument, "email" | "password">
 ) {
   const schema = Joi.object({
-    username: Joi.string().min(3).max(50).required(),
     password: Joi.string().min(5).max(255).required(),
     email: Joi.string().min(5).max(255).required().email(),
   });

@@ -2,23 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  height: 100%;
-}
-
-body {
-  height: 100%;
-  display: block;
-}
-
-#root {
-  display: flex;
-  flex-direction: row;
-}
-
 .map-container {
-  height: 919px !important;
-  width: 70% !important;
+  height: 700px !important;
+  width: 700px !important;
 }
 
 .draw-tools {

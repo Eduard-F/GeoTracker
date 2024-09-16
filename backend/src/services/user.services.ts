@@ -5,14 +5,12 @@ import moment from "moment";
 export const getUser = (user: UserDocument) => ({})
 
 export const createUser = ({
-  username,
   email,
   password,
 }: {
-  username: string;
   email: string;
   password: string;
-}) => new User({ username, email, password });
+}) => new User({ email, password });
 export const setResetPasswordToken = (
   user: UserDocument,
   resetTokenValue: string,

@@ -3,13 +3,13 @@ import argon2 from "argon2";
 import moment from "moment";
 
 export interface UserDocument extends Document {
-  username: string;
+  name: string;
   email: string;
   password: string;
   passwordResetToken: string;
   passwordResetExpires: Date;
   isVerified: boolean;
-  isAdmin: boolean;
+  role: string;
   expires?: Date;
 
   comparePassword(password: string): Promise<boolean>;
@@ -17,9 +17,9 @@ export interface UserDocument extends Document {
 }
 
 const userSchema = new Schema<UserDocument>({
-  username: {
+  name: {
     type: String,
-    required: true,
+    required: false,
     minlength: 2,
     maxlength: 50,
   },
@@ -43,9 +43,9 @@ const userSchema = new Schema<UserDocument>({
     required: true,
     default: false,
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
+  role: {
+    type: String,
+    default: 'user',
     required: true,
   },
   expires: { type: Date, default: moment().toDate(), expires: 43200 },

@@ -18,9 +18,9 @@ export const postLogin = (req: Request, res: Response, next: NextFunction) => {
     return res.status(400).send({ message: error.details[0].message });
   }
 
-  let sanitizedInput = sanitize<{ username: string; password: string }>(req.body);
+  let sanitizedInput = sanitize<{ email: string; password: string }>(req.body);
 
-  sanitizedInput.username = req.body.username.toLowerCase();
+  sanitizedInput.email = req.body.email.toLowerCase();
 
   // @ts-ignore
   passport.authenticate("local", (err: Error, user: UserDocument, info) => {
