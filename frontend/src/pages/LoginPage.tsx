@@ -16,12 +16,12 @@ export default function LoginPage() {
   const dispatch = useAppDispatch();
 
   const initialValues: LoginFormValues = {
-    username: "",
+    email: "",
     password: "",
   };
 
   const validationSchema = Yup.object({
-    username: Yup.string().min(3).max(50).required("Required"),
+    email: Yup.string().min(5).max(255).email().required("Required"),
     password: Yup.string().min(5).max(255).required("Required"),
   });
 
@@ -42,14 +42,14 @@ export default function LoginPage() {
     <div className="container">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="field">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
           <input
-            {...register("username")}
-            id="username"
+            {...register("email")}
+            id="email"
             type="text"
-            placeholder="Username"
+            placeholder="Email"
           />
-          {errors.username && <Error>{errors.username.message}</Error>}
+          {errors.email && <Error>{errors.email.message}</Error>}
         </div>
         <div className="field">
           <label htmlFor="password">Password</label>

@@ -5,9 +5,7 @@ export default function ProfilePage() {
 
   return (
     <div className="container">
-      <p>
-        Hey <b>{user?.username}</b> ! Check the github repository:
-      </p>
+      <p>Check the github repository:</p>
       <a href="https://github.com/flaviuse/mern-authentification">
         https://github.com/flaviuse/mern-authentification
       </a>

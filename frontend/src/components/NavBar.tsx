@@ -16,7 +16,7 @@ export default function NavBar() {
       {isAuth ? (
         <div>
           <NavLink className={navLinkClass} to="/my-profile">
-            {user?.username}
+            {user?.email}
           </NavLink>
           <NavLink
             className={({ isActive }) =>

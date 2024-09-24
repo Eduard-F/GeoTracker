@@ -51,7 +51,7 @@ const userSchema = new Schema<UserDocument>({
   expires: { type: Date, default: moment().toDate(), expires: 43200 },
 });
 
-userSchema.methods.comparePassword = async function(password: string) {
+userSchema.methods.comparePassword = async function (password: string): Promise<boolean> {
   return await argon2.verify(this.password, password);
 };
 

@@ -33,13 +33,11 @@ export default function RegisterPage() {
 
   const initialValues: RegisterFormValues = {
     email: "",
-    username: "",
     password: "",
   };
 
   const validationSchema = Yup.object({
     email: Yup.string().min(5).max(255).email().required("Required"),
-    username: Yup.string().min(3).max(50).required("Required"),
     password: Yup.string().min(5).max(255).required("Required"),
   });
 
@@ -98,16 +96,6 @@ export default function RegisterPage() {
                 {errors.email && <Error>{errors.email.message}</Error>}
               </div>
               <div className="field">
-                <label htmlFor="username">Username</label>
-                <input
-                  {...register("username")}
-                  id="username"
-                  type="text"
-                  placeholder="Username"
-                />
-                {errors.username && <Error>{errors.username.message}</Error>}
-              </div>
-              <div className="field">
                 <label htmlFor="password">Password</label>
                 <input
                   {...register("password")}
@@ -146,10 +134,7 @@ export default function RegisterPage() {
           <div className="container">
             <p>Still not received an email? </p>
             <p>Try to register again. You may have given the wrong email. </p>
-            <p>
-              If you want to be able to use the same username, reset the
-              registration :
-            </p>
+            <p>If you want to reset the registration :</p>
 
             <button onClick={handleResetRegister}>
               Click here to reset the registration

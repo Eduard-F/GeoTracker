@@ -22,8 +22,8 @@ export const postLogin = (req: Request, res: Response, next: NextFunction) => {
 
   sanitizedInput.email = req.body.email.toLowerCase();
 
-  // @ts-ignore
-  passport.authenticate("local", (err: Error, user: UserDocument, info) => {
+
+  passport.authenticate("local", (err: Error, user: UserDocument, info:any) => {
     if (err) {
       return next(err);
     }
